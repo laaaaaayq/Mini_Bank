@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+	<link rel="stylesheet" href="{% static 'css/table.css' %}">
+</head>
+<body>
+<div class="container">
+	<table>
+		<thead>
+			<tr>
+				<th>Account Number</th>
+				<th>Name</th>
+				<th>Balance</th>
+				<th>Phone</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				{% for i in data %}
+				<td>{{i.Acc_number}}</td>
+				<td>{{i.Name}}</td>
+				<td>{{i.Amount}}</td>
+				<td>{{i.Phone}}</td>
+				{% endfor %}
+			</tr>
+		</tbody>
+	</table>
+
+</div>
+<div class="container1">
+	<form action="deposit" method="post">
+        {% csrf_token %}
+		<h2> Deposit Amount</h2>
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" style="cursor : pointer" value="GO"></form>
+</div>
+<div class="container2">
+	<form action="withdraw" method="post">
+        {% csrf_token %}
+		<h2> Withdraw Amount</h2>
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" style="cursor : pointer" value="GO"></form>
+</div>
+<div class="container3">
+	<form action="logout" method="post">
+        {% csrf_token %}
+        <input type="submit" style="cursor : pointer" value="logout">
+	</form>
+</div>
+</body>
+</html>
