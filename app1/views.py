@@ -82,12 +82,15 @@ def withdrawed(request):
         withdraw=int(request.POST['withdraw'])
         if withdraw % 100 ==0 or withdraw % 200==0 or withdraw % 500==0:
           data=Register.objects.get(Acc_number=acc_no)
-          data.Amount-=withdraw
-          data.save()
-          context={
+          data.Amount -= withdraw
+          if data.Amount<1000:
+              return render(request, 'withdraw.html', {'hint': "There would be no minimum balance"})
+          else:
+           data.save()
+           context={
             'msg': "The amount withdrawn successfully"
-          }
-          return render(request,'withdraw.html',context)
+           }
+           return render(request,'withdraw.html',context)
         else:
             return render(request,'withdraw.html',{'note':"The amount is not a multiple of 100,200 or 500"})
 
